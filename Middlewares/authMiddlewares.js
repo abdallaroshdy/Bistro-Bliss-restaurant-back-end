@@ -18,6 +18,7 @@ const userMiddleware = (req ,res ,next)=>{
     try{
         decoded = jwd.verify(token, process.env.JWDKEY); 
         
+        
     }catch(err){
         count++
     }
@@ -26,6 +27,15 @@ const userMiddleware = (req ,res ,next)=>{
         res.status(401).json({
             status: resmsg.fail ,
             data : "You should login first"
+        })
+        return
+    }
+
+
+    if(decoded.expiresAt < Date.now()){
+        res.status(401).json({
+            status: resmsg.fail ,
+            data : "Your token time is expired"
         })
         return
     }
@@ -57,6 +67,14 @@ const NormalUserOnlyMiddleware = (req ,res ,next)=>{
             throw("")
         }
 
+        if(decoded.expiresAt < Date.now()){
+            res.status(401).json({
+                status: resmsg.fail ,
+                data : "Your token time is expired"
+            })
+            return
+        }
+
     }
     catch(err){
         res.status(401).json({
@@ -65,6 +83,8 @@ const NormalUserOnlyMiddleware = (req ,res ,next)=>{
         })
         return
     }
+
+    
  
     next()
 }
@@ -90,6 +110,14 @@ const AdminOnlyMiddleware = (req ,res ,next)=>{
 
         if("admin" != decoded.role){
             throw("")
+        }
+
+        if(decoded.expiresAt < Date.now()){
+            res.status(401).json({
+                status: resmsg.fail ,
+                data : "Your token time is expired"
+            })
+            return
         }
 
     }

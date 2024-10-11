@@ -8,7 +8,7 @@ const menuSchema = mongoose.Schema({
     desc : String,
     catigory : {type : String , enum : ["Breakfast" , "Main Dish", "Drink", "Dessert"]} ,
     imgUrl : String,
-    registeredAt : {type : Date , default:Date.now()}
+    registeredAt : {type : Date , default: ()=>Date.now()}
 
 })
 

@@ -78,6 +78,7 @@ const login = async (req,res)=>{
                 email : user.email,
                 phonenumber : user.phonenumber,
                 gender : user.gender,
+                expiresAt : Date.now() + 60 * 10000,
                 role : "user"
             }, process.env.JWDKEY)
     
@@ -87,6 +88,7 @@ const login = async (req,res)=>{
             })
         }else{
             const token = jwd.sign( {
+                expiresAt : Date.now() + 60 * 10000,
                 role : "admin"
             }, process.env.JWDKEY)
 
@@ -143,10 +145,10 @@ const sendOTPVerification = async (email, res) => {
                         ${otp}
                     </span>
                 </div>
-                <p style="font-size: 16px; color: #333; text-align: center;">This code <b>expires in 5 minutes</b>.</p>
+                <p style="font-size: 16px; color: #333; text-align: center;">This code <b>expires in 3 minutes</b>.</p>
                 <p style="font-size: 14px; color: #888;">If you didn't request this, please ignore this email.</p>
                 <footer style="text-align: center; font-size: 12px; color: #888; margin-top: 20px;">
-                    &copy; 2024 Your Company. All rights reserved.
+                    &copy; 2024 Bistro-Bliss Restaurant. All rights reserved.
                 </footer>
             </div>
             `
@@ -184,10 +186,10 @@ const sendOTPVerification = async (email, res) => {
         console.error(err);
         
         
-        res.status(500).json({
-            status: "Failed",
+        res.status(400).json({
+            status: responseStatus.fail,
             msg: "Error sending OTP email",
-            error: err.message
+            data: err.message
         });
     }
 };
@@ -223,12 +225,19 @@ const verifyotp = async(req,res)=>{
 
             const expiresAt = otpVerification.expiresAt
 
-            if(Date.now() > expiresAt){
-                console.log(expiresAt);
-                console.log(Date.now());
-                await userOTPVerifications.deleteOne({eamil:email})
-                throw("this code is expired , plz request again.")
+            const currentTime = new Date().toISOString(); // Current time in UTC
+            const expiresAtUTC = new Date(expiresAt).toISOString(); // Ensure expiresAt is in UTC
+
+            console.log("Expires At (UTC):", expiresAtUTC);
+            console.log("Current Time (UTC):", currentTime);
+            const bufferMilliseconds = 5000; // 5-second buffer
+            if (Date.now() > (new Date(expiresAt).getTime() + bufferMilliseconds)) {
+                console.log("Expires At:", new Date(expiresAt));
+                console.log("Current Time:", new Date(Date.now()));
+                await userOTPVerifications.deleteOne({ email: email });
+                throw new Error("This code is expired, please request again.");
             }
+
 
             res.status(200).json({
                 status:responseStatus.success,
