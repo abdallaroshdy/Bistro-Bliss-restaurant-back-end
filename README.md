@@ -43,8 +43,10 @@ This repository contains the backend code for a Bistro-Bliss Restaurant System. 
    ```bash
    git clone https://github.com/abdallaroshdy/Bistro-Bliss-restaurant-back-end.git
    ```
-
-2. **Start the Server:**
+2. **Update Environment Variables:**
+   * Update you variables from the `.env` file provided in the repository.
+     
+3. **Start the Server:**
    ```bash
    nodemon start
    ```
