@@ -50,7 +50,7 @@ This repository contains the backend code for a Bistro-Bliss Restaurant System. 
    npm install
    ```
 
-## 3. Set Up Environment Variables
+ 3. **Set Up Environment Variables**
 
 * Create a `.env` file in the root directory of the project.
 * Add the following environment variables:
