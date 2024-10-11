@@ -1,6 +1,6 @@
 # Bistro-Bliss Restaurant System - Backend
 
-This repository contains the backend code for a Bistro-Bliss Restaurant System. This backend is built using Node.js, Express.js, and MongoDB. 
+This repository contains the backend code for a Bistro-Bliss Restaurant System. This backend is built using Node.js, Express.js, and MongoDB.  This project was developed as the final project for the Orange - AMIT scholarship program in the Mean-stack track. The program ran from September 1st, 2024, to September 27th, 2024.
 
 ## Features
 
