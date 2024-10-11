@@ -45,13 +45,26 @@ This repository contains the backend code for a Bistro-Bliss Restaurant System. 
    ```
    
 2. **Install Dependencies:**
-```bash
-cd Bistro-Bliss-restaurant-back-end
-npm install
-```
+   ```bash
+   cd Bistro-Bliss-restaurant-back-end
+   npm install
+   ```
 
-3. **Update Environment Variables:**
-   * Update you variables from the `.env` file provided in the repository.
+3. **Set Up Environment Variables:**
+   * Create a `.env` file in the root directory of the project.
+   * Add the following environment variables from the `.env` file provided in the repository:
+     -------------------------------------------------------
+     PORT = "enter your port like that 5210"
+     DB = "Enter your mongoDB link"
+     JWDKEY = "Enter strong Key like that : RKJVWP$%@*254j5AVFAarha"
+      
+     AdminUser = "Enter your admin email"
+     AdminPassword = "Enter your admin password"
+     AdminJWDKEY = "Enter strong Key like that : RKJVWP$%@*254j5AVFAarha"
+      
+     FoodEmail = "Enter your Email"
+     FoodPassword = "Enter your app password"
+     -------------------------------------------------------
      
 4. **Start the Server:**
    ```bash
