@@ -50,21 +50,21 @@ This repository contains the backend code for a Bistro-Bliss Restaurant System. 
    npm install
    ```
 
-3. **Set Up Environment Variables:**
-   * Create a `.env` file in the root directory of the project.
-   * Add the following environment variables from the `.env` file provided in the repository:
-     -------------------------------------------------------
-     PORT = "enter your port like that 5210"
-     DB = "Enter your mongoDB link"
-     JWDKEY = "Enter strong Key like that : RKJVWP$%@*254j5AVFAarha"
-      
-     AdminUser = "Enter your admin email"
-     AdminPassword = "Enter your admin password"
-     AdminJWDKEY = "Enter strong Key like that : RKJVWP$%@*254j5AVFAarha"
-      
-     FoodEmail = "Enter your Email"
-     FoodPassword = "Enter your app password"
-     -------------------------------------------------------
+## 3. Set Up Environment Variables
+
+* Create a `.env` file in the root directory of the project.
+* Add the following environment variables:
+
+| Variable Name | Description | Example |
+|---|---|---|
+| PORT | Port for the server to listen on. | 5210 |
+| DB | MongoDB connection string. | mongodb://localhost:27017/your_database_name |
+| JWDKEY | Secret key for JWT (JSON Web Token) authentication. | RKJVWP$%@*254j5AVFAarha |
+| AdminUser | Email address of the admin user. | admin@example.com |
+| AdminPassword | Password for the admin user. | YourStrongPassword |
+| AdminJWDKEY | Secret key for JWT authentication for the admin user. |  RKJVWP$%@*254j5AVFAarha |
+| FoodEmail | Your email address for sending verification emails. | your_email@example.com |
+| FoodPassword | Your app password for sending verification emails. | YourAppPassword |
      
 4. **Start the Server:**
    ```bash
