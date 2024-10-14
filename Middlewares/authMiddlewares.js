@@ -13,33 +13,26 @@ const userMiddleware = (req ,res ,next)=>{
         return
     }
 
-    let decoded ; 
-    let count = 0 
+    let decoded ;  
     try{
+
         decoded = jwd.verify(token, process.env.JWDKEY); 
         
-        
     }catch(err){
-        count++
-    }
+        // console.log(err);
 
-    if(count!=0){
-        res.status(401).json({
+        let data = "You should login first"
+
+        if(err.name && err.name  === "TokenExpiredError"){
+            data = err.message
+        }
+        
+        res.status(401).clearCookie("jwd").json({
             status: resmsg.fail ,
-            data : "You should login first"
+            data : data 
         })
         return
     }
-
-
-    if(decoded.expiresAt < Date.now()){
-        res.status(401).json({
-            status: resmsg.fail ,
-            data : "Your token time is expired"
-        })
-        return
-    }
-    
 
     next()
 }
@@ -67,19 +60,18 @@ const NormalUserOnlyMiddleware = (req ,res ,next)=>{
             throw("")
         }
 
-        if(decoded.expiresAt < Date.now()){
-            res.status(401).json({
-                status: resmsg.fail ,
-                data : "Your token time is expired"
-            })
-            return
-        }
+    }catch(err){
+        // console.log(err);
 
-    }
-    catch(err){
-        res.status(401).json({
+        let data = "You should login first"
+
+        if(err.name && err.name  === "TokenExpiredError"){
+            data = err.message
+        }
+        
+        res.status(401).clearCookie("jwd").json({
             status: resmsg.fail ,
-            data : "You can't access this resource , only normal user can access this resource"
+            data : data 
         })
         return
     }
@@ -112,19 +104,18 @@ const AdminOnlyMiddleware = (req ,res ,next)=>{
             throw("")
         }
 
-        if(decoded.expiresAt < Date.now()){
-            res.status(401).json({
-                status: resmsg.fail ,
-                data : "Your token time is expired"
-            })
-            return
-        }
+    }catch(err){
+        // console.log(err);
 
-    }
-    catch(err){
-        res.status(401).json({
+        let data = "You should login first"
+
+        if(err.name && err.name  === "TokenExpiredError"){
+            data = err.message
+        }
+        
+        res.status(401).clearCookie("jwd").json({
             status: resmsg.fail ,
-            data : "You can't access this resource , only admin can access this resource"
+            data : data 
         })
         return
     }

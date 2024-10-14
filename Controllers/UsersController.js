@@ -78,9 +78,8 @@ const login = async (req,res)=>{
                 email : user.email,
                 phonenumber : user.phonenumber,
                 gender : user.gender,
-                expiresAt : Date.now() + 60 * 10000,
                 role : "user"
-            }, process.env.JWDKEY)
+            }, process.env.JWDKEY,{expiresIn : process.env.ExpireToken})
     
             res.status(200).cookie('jwd',token).json({
                 status : responseStatus.success,
@@ -88,9 +87,8 @@ const login = async (req,res)=>{
             })
         }else{
             const token = jwd.sign( {
-                expiresAt : Date.now() + 60 * 10000,
                 role : "admin"
-            }, process.env.JWDKEY)
+            }, process.env.JWDKEY ,{expiresIn : process.env.ExpireToken})
 
             res.status(200).cookie('jwd' , token).json({
                 status : responseStatus.success,
