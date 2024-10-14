@@ -15,7 +15,7 @@ const userMiddleware = (req ,res ,next)=>{
 
     let decoded ;  
     try{
-
+ 
         decoded = jwd.verify(token, process.env.JWDKEY); 
         
     }catch(err){
