@@ -39,18 +39,18 @@ This repository contains the backend code for a Bistro-Bliss Restaurant System. 
 
 ## Getting Started
 
- 1. **Clone the Repository:**
+## 1. Clone the Repository:
    ```bash
    git clone https://github.com/abdallaroshdy/Bistro-Bliss-restaurant-back-end.git
    ```
    
- 2. **Install Dependencies:**
+## 2. Install Dependencies:
    ```bash
    cd Bistro-Bliss-restaurant-back-end
    npm install
    ```
 
-  3. **Set Up Environment Variables**
+ ## 3. Set Up Environment Variables
 
 * Create a `.env` file in the root directory of the project.
 * Add the following environment variables:
@@ -65,9 +65,9 @@ This repository contains the backend code for a Bistro-Bliss Restaurant System. 
 | AdminJWDKEY | Secret key for JWT authentication for the admin user. |  RKJVWP$%@*254j5AVFAarha |
 | FoodEmail | Your email address for sending verification emails. | your_email@example.com |
 | FoodPassword | Your app password for sending verification emails. | YourAppPassword |
-| ExpireToken | expire date for user session | 600s |
+| ExpireToken  | THis is expire time for user's session | 10m |
      
- 4. **Start the Server:**
+## 4. Start the Server:
    ```bash
    nodemon start
    ```
