@@ -78,9 +78,7 @@ const login = async (req,res)=>{
                 email : user.email,
                 phonenumber : user.phonenumber,
                 gender : user.gender,
-                role : "user",
-                httpOnly: true,
-                secure: true
+                role : "user"
             }, process.env.JWDKEY,{expiresIn : process.env.ExpireToken})
     
             res.status(200).cookie('jwd',token).json({
@@ -89,12 +87,14 @@ const login = async (req,res)=>{
             })
         }else{
             const token = jwd.sign( {
-                role : "admin",
-                httpOnly: true,
-                secure: true
+                role : "admin"
             }, process.env.JWDKEY ,{expiresIn : process.env.ExpireToken})
 
-            res.status(200).cookie('jwd' , token).json({
+            res.status(200).cookie('jwd' , token, {
+                httpOnly: true, // Prevent client-side access to the cookie
+                secure: true,   // Send only over HTTPS
+                sameSite: 'None' // Allows cross-origin cookies (if necessary)
+              }).json({
                 status : responseStatus.success,
                 data : "Login Successfully as admin"
             })
