@@ -88,7 +88,8 @@ const AdminOnlyMiddleware = (req ,res ,next)=>{
     if(!token){
         res.status(401).json({
             status: resmsg.fail ,
-            data : "You should login first"
+            data : "You should login first",
+            abdallaMSG : "first "
         })
         return
     }
@@ -107,7 +108,7 @@ const AdminOnlyMiddleware = (req ,res ,next)=>{
     }catch(err){
         // console.log(err);
 
-        let data = "You should login first"
+        let data = "You should login first as admin"
 
         if(err.name && err.name  === "TokenExpiredError"){
             data = err.message
@@ -115,7 +116,10 @@ const AdminOnlyMiddleware = (req ,res ,next)=>{
         
         res.status(401).json({ //.clearCookie("jwd")
             status: resmsg.fail ,
-            data : data 
+            data : data ,
+            abdallaMSG : {
+                "1" : "2" , err
+            }
         })
         return
     }
