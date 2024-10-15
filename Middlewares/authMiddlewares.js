@@ -113,7 +113,7 @@ const AdminOnlyMiddleware = (req ,res ,next)=>{
             data = err.message
         }
         
-        res.status(401).clearCookie("jwd").json({
+        res.status(401).json({ //.clearCookie("jwd")
             status: resmsg.fail ,
             data : data 
         })
